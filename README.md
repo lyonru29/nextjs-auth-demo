@@ -11,8 +11,3 @@ yarn dev
 # or
 pnpm dev
 ```
-
-## Server Side Routing
-- 文件目录结构代表服务端路由
- 
-## Route handler 其实就是在nextjs内部建立的api

@@ -15,6 +15,7 @@ const handler = NextAuth({
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
+                const { username, password } = credentials
                 // You need to provide your own logic here that takes the credentials
                 // submitted and returns either a object representing a user or value
                 // that is false/null if the credentials are invalid.
@@ -24,16 +25,14 @@ const handler = NextAuth({
                 const res = await fetch("http://localhost:7003/api/signin", {
                     method: 'POST',
                     body: JSON.stringify({
-                        name: "Lyon",
-                        password: "123"
+                        name: username, password
                     }),
                     headers: { "Content-Type": "application/json" }
                 })
                 const user = await res.json()
-                console.log(user);
                 // If no error and we have user data, return it
                 if (res.ok && user) {
-                    return user
+                    return user.data
                 }
                 // Return null if user data could not be retrieved
                 return null
@@ -41,19 +40,23 @@ const handler = NextAuth({
         })
     ],
     /**
-     * what is callback
+     * what are callbacks
+     *
      */
     callbacks: {
-        async jwt({ token, user }) {
-            console.log("user", user);
+        async jwt({ token, user, profile, isNewUser }) {
+            console.log("user", user, profile, isNewUser);
             console.log("token", token);
-            return { ...token, ...user }
+            return { ...token, ...user, test: "12" }
         },
         async session({ session, token }) {
             session.user = token
             return session
 
         }
+    },
+    pages: {
+        signIn: "/login"
     }
 })
 
