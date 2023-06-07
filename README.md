@@ -1,13 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# A Nextjs13 App Router Auth Example Using Next-Auth and External Service
 
-## Getting Started
+### 1. Replace your external service auth URL
+### 2. Run 
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
+  npm install
+  npm run dev
+```
+

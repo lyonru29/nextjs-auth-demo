@@ -44,14 +44,11 @@ const handler = NextAuth({
      *
      */
     callbacks: {
-        async jwt({ token, user, profile, isNewUser }) {
-            console.log("user", user, profile, isNewUser);
-            console.log("token", token);
-            return { ...token, ...user, test: "12" }
+        async jwt({ token, user }) {
+            return { ...token, ...user }
         },
         async session({ session, token }) {
-            session.user = token
-            return session
+            return { ...session, ...token }
 
         }
     },

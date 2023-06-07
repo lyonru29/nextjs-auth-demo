@@ -3,9 +3,12 @@
 
 import { signIn } from "next-auth/react"
 import { useState } from "react"
+import { useSearchParams } from "next/navigation"
 
 export default () => {
 
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get("callbackUrl")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const onNameChange = e => {
@@ -21,7 +24,7 @@ export default () => {
             username,
             password,
             redirect: "true",
-            callbackUrl: "/"
+            callbackUrl,
 
         },
 
